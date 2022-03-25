@@ -388,7 +388,7 @@ class __MonthGridState extends State<_MonthGrid> {
         !scrollToSelectedMonth) {
       _initialSrollOffset = 0;
     } else {
-      _initialSrollOffset = ((widget.monthCustomizer?.monthHeight ?? 300) +
+      _initialSrollOffset = ((widget.monthCustomizer?.montMinhHeight ?? 300) +
               (widget.monthCustomizer?.monthHeaderCustomizer?.height ?? 40) +
               (widget.monthCustomizer?.monthWeekCustomizer?.height ?? 40)) *
           (mCtr.mSelectedDate.month - 1);
@@ -422,9 +422,9 @@ class __MonthGridState extends State<_MonthGrid> {
           //     crossAxisCount: 1, mainAxisExtent: 340),
           controller: _scrollController,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: widget.monthCustomizer?.monthWidth ??
+            maxCrossAxisExtent: widget.monthCustomizer?.monthMinWidth ??
                 maxCrossAxisExtentCounter(context),
-            mainAxisExtent: ((widget.monthCustomizer?.monthHeight ?? 300) +
+            mainAxisExtent: ((widget.monthCustomizer?.montMinhHeight ?? 300) +
                 (widget.monthCustomizer?.monthHeaderCustomizer?.height ?? 40) +
                 (widget.monthCustomizer?.monthWeekCustomizer?.height ?? 40)),
             crossAxisSpacing: widget.monthCustomizer?.crossAxisSpacing ?? 20,
@@ -498,7 +498,7 @@ class SingleMonthView extends StatelessWidget {
     final mCtr = Get.find<MonthBuilderController>(tag: matchId);
 
     double monthWidth = size.width;
-    double monthHeight = monthCustomizer?.monthHeight ?? 300;
+    double monthHeight = monthCustomizer?.montMinhHeight ?? 300;
     double buttonHeight = monthHeight / 6;
     late double buttonWidth;
     double buttonChildHeight =

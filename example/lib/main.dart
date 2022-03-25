@@ -1,6 +1,7 @@
-import 'dart:developer';
-
 import 'package:calendar_builder/calendar_builder.dart';
+import 'package:example/custom_month_builder.dart';
+import 'package:example/customized_month_builder.dart';
+import 'package:example/month_builder.dart';
 
 import 'package:flutter/material.dart';
 
@@ -9,72 +10,76 @@ void main() {
   runApp(const MyApp());
 }
 
-///Main root of this package
 class MyApp extends StatelessWidget {
-  ///constructor of root widget
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Calendar builder Demo',
       // theme: ThemeData(brightness: Brightness.dark),
       // themeMode: ThemeMode.dark,
       // darkTheme: ThemeData.dark(),
-      home: const CalendarHome(),
+      routes: {
+        '/month_builder': (context) => const MonthBuilderScreen(),
+        '/customized_month_builder': (context) => const CustomizedMonthBuilderScreen(),
+        '/custom_month_builder': (context) => const CustomMonthBuilderScreen(),
+        // '/fromAsset': (context) => const PlayVideoFromAsset(),
+        // '/fromNetwork': (context) => const PlayVideoFromNetwork(),
+        // '/customVideo': (context) => const CustomVideoControlls(),
+      },
+      home: const MainPage(),
     );
   }
 }
 
-///Home class
-class CalendarHome extends StatelessWidget {
-  ///Home constructor
-  const CalendarHome({
-    Key? key,
-  }) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
+      body: Center(
+        child: ListView(
+          shrinkWrap: true,
           children: [
-            Expanded(
-              child: CbMonthBuilder(
-                  cbConfig: CbConfig(
-                    startDate: DateTime(2020),
-                    endDate: DateTime(2023),
-                    selectedDate: DateTime(2021),
-                    selectedYear: DateTime(2021),
-                    weekStartsFrom: WeekStartsFrom.thursday,
-                    eventDates: [
-                      DateTime(2021,1,2),
-                      DateTime(2021,1,2),
-                      DateTime(2021,1,3)
-                    ],
-                    highlightedDates: [
-                      DateTime(2021,1,6),
-                      DateTime(2021,1,3)
-                    ]
-                  ),
-                  monthCustomizer: MonthCustomizer(
-                  ),
-                  onYearHeaderExpanded: (isExp) {
-                    log('isExpanded' + isExp.toString());
-                  },
-                  onDateClicked: (onDateClicked) {
-                    log('selected date' +
-                        onDateClicked.selectedDate.toString());
-                    log('isSelected ' + onDateClicked.isSelected.toString());
-                    log('isHighlighted ' + onDateClicked.isHighlighted.toString());
-                    log('hasEvent ' + onDateClicked.hasEvent.toString());
-                    log('isCurrentDate ' + onDateClicked.isCurrentDate.toString());
-                    log('isDisabled ' + onDateClicked.isDisabled.toString());
-                  },
-                  onYearButtonClicked: (year, isSelected) {
-                    log('selected year' + year.toString());
-                    log('isSelected ' + isSelected.toString());
-                  }),
-            )
+            // _button('Play video from File'),
+            _button(
+              'Default / Simple Month Builder',
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/month_builder'),
+            ),
+            _button(
+              'Customized Month Builder',
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/customized_month_builder'),
+            ),
+            _button(
+              'Custom Month Builder',
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/custom_month_builder'),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _button(String text, {void Function()? onPressed}) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: OutlinedButton(
+          onPressed: onPressed ?? () {},
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );

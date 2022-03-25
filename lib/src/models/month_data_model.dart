@@ -343,8 +343,8 @@ class MonthButtonCustomizer {
 class MonthCustomizer {
   ///CUstomiser class for  month
   MonthCustomizer({
-    this.monthHeight = 300,
-    this.monthWidth,
+    this.montMinhHeight = 300,
+    this.monthMinWidth,
     this.scrollToSelectedMonth = false,
     this.shrinkYearDropDownOnScroll = true,
     this.mainAxisSpacing = 20,
@@ -359,10 +359,10 @@ class MonthCustomizer {
   });
 
   ///heigh of single month
-  final double monthHeight;
+  final double montMinhHeight;
 
-  ///width of single month
-  final double? monthWidth;
+  ///width of single month depend on the device you use
+  final double? monthMinWidth;
 
   ///default `scrollToSelectedMonth = false`
   ///
