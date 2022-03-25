@@ -97,7 +97,7 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
               builder: (mCtr) {
                 String preMonth =
                     mCtr.mSelectedDate.year == mCtr.mSelectedYear.year
-                        ? '${Global.months[mCtr.mSelectedDate.month - 1]} - '
+                        ? '${CalendarGlobals.months[mCtr.mSelectedDate.month - 1]} - '
                         : '';
                 String year = '$preMonth${mCtr.mSelectedYear.year}';
                 return Text(
@@ -138,7 +138,7 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
                       builder: (mCtr) {
                         String preMonth = mCtr.mSelectedDate.year ==
                                 mCtr.mSelectedYear.year
-                            ? '${Global.months[mCtr.mSelectedDate.month - 1]} - '
+                            ? '${CalendarGlobals.months[mCtr.mSelectedDate.month - 1]} - '
                             : '';
                         String year = '$preMonth${mCtr.mSelectedYear.year}';
                         return widget.yearHeaderBuilder!(
@@ -201,10 +201,10 @@ class __YearDropDownState extends State<_YearDropDown>
         return AnimatedSize(
           vsync: this,
           curve: Curves.fastOutSlowIn,
-          duration: Global.kMinDuration,
-          reverseDuration: Global.kMinDuration,
+          duration: CalendarGlobals.kMinDuration,
+          reverseDuration: CalendarGlobals.kMinDuration,
           child: AnimatedOpacity(
-            duration: Global.kMaxDuration,
+            duration: CalendarGlobals.kMaxDuration,
             opacity: mUiCtr.isYearPickerExpanded ? 1.0 : 0,
             child: SizedBox(
               height: mUiCtr.isYearPickerExpanded ? widget.height : 0,
@@ -338,7 +338,7 @@ class __YearBtnGridBuilderState extends State<_YearBtnGridBuilder>
             ? widget.mCtr.mAllYears[i]
             : widget.mCtr.m16DateTimeYears[i],
         builder: (mCtr) {
-          // print('Year:$i');
+          // Global.debugLogs('Year:$i');
           DateTime thisLoopDate = mCtr.m16DateTimeYears.isEmpty
               ? mCtr.mAllYears[i]
               : mCtr.m16DateTimeYears[i];
@@ -452,7 +452,7 @@ class __YearButtons extends State<_YearButtons>
       if (widget.onPressed != null) {
         widget.onPressed!(widget.isyearDisabled, widget.thisLoopDate);
       }
-      debugPrint('Calendar_builder: year button disabled');
+      CalendarGlobals.debugLogs('Calendar_builder: year button disabled');
     } else {
       if (widget.onPressed != null) {
         widget.onPressed!(widget.isyearDisabled, widget.thisLoopDate);

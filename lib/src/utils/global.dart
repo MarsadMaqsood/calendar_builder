@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///A global theme classs for all colors [Theme]
-class Global {
+class CalendarGlobals {
   static const kMinDuration = Duration(milliseconds: 400);
   static const kMaxDuration = Duration(milliseconds: 800);
   static const Color kOrange = Color(0xffFF5917);
@@ -84,4 +84,8 @@ class Global {
       'SAT',
     ],
   ];
+  static bool showLogs = false;
+  static void debugLogs(Object _log) {
+    if (showLogs) debugPrint(_log.toString());
+  }
 }

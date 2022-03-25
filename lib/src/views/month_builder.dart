@@ -97,6 +97,7 @@ class _CbMonthBuilderState extends State<CbMonthBuilder> {
   @override
   void initState() {
     super.initState();
+    Get.config(enableLog: CalendarGlobals.showLogs);
     initControlers();
   }
 
@@ -340,12 +341,12 @@ class __MonthViewState extends State<_MonthView> {
           );
         }
 
-        print('page: $index');
+        CalendarGlobals.debugLogs('page: $index');
         return GetBuilder<MonthBuilderController>(
             id: 'removedDate:$thisSelectedYear!',
             tag: widget.matchingId,
             builder: (mCtr) {
-              print(thisSelectedYear);
+              CalendarGlobals.debugLogs(thisSelectedYear);
               return mCtr.removedDate == thisSelectedYear
                   ? const SizedBox()
                   : _monthGrid();
@@ -435,7 +436,7 @@ class __MonthGridState extends State<_MonthGrid> {
           shrinkWrap: true,
           itemCount: 12,
           itemBuilder: (context, index) {
-            print('month $index');
+            CalendarGlobals.debugLogs('month $index');
             // return Text('data');
             return SingleMonthView(
               matchId: widget.matchingId,
@@ -554,7 +555,8 @@ class SingleMonthView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    userMonths?[monthIndex] ?? Global.months[monthIndex],
+                    userMonths?[monthIndex] ??
+                        CalendarGlobals.months[monthIndex],
                     style: textStyleHeader ??
                         const TextStyle(
                             fontSize: 22, fontWeight: FontWeight.w600),
@@ -565,7 +567,7 @@ class SingleMonthView extends StatelessWidget {
             return monthCustomizer?.monthHeaderBuilder == null
                 ? ifHeaderBuilderEmpty
                 : monthCustomizer!.monthHeaderBuilder!(
-                    Global.months[monthIndex],
+                    CalendarGlobals.months[monthIndex],
                     headerHeight,
                     headerWidth,
                     paddingLeft,
@@ -591,7 +593,8 @@ class SingleMonthView extends StatelessWidget {
                 child: Align(
                   child: Text(
                     userWeek?[weekIndex] ??
-                        Global.weeksStarter[weekSelectedIndex][weekIndex],
+                        CalendarGlobals.weeksStarter[weekSelectedIndex]
+                            [weekIndex],
                     style: textStyleWeeek ??
                         const TextStyle(
                             fontSize: 14,
@@ -606,7 +609,8 @@ class SingleMonthView extends StatelessWidget {
                   ? ifWeekBuilderEmpty
                   : monthCustomizer!.monthWeekBuilder!(
                       weekIndex,
-                      Global.weeksStarter[weekSelectedIndex][weekIndex],
+                      CalendarGlobals.weeksStarter[weekSelectedIndex]
+                          [weekIndex],
                       weekHeight,
                       buttonWidth,
                     );
@@ -749,7 +753,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
             id: mAll42DaysInMonth[index],
             tag: widget.matchId,
             builder: (mCtr) {
-              // print('grid Btn $index month${widget.monthIndex}');
+              // Global.debugLogs('grid Btn $index month${widget.monthIndex}');
               _checkingMonthDays(
                   index: index, selectedDate: mCtr.mSelectedDate);
               var _monthButtons = _MonthButtons(

@@ -112,13 +112,13 @@ class MonthBuilderController extends GetxController {
   ///to check wether the saved month size exceeds 3
   ///if excedes it removes previous cached datas 
   void savedMonthRemover(DateTime date) {
-    print('-----$date');
+    CalendarGlobals.debugLogs('-----$date');
     if (savedMonthDatas.length > 3) {
       if (savedMonthDatas[0] != date) {
         removedDate = savedMonthDatas[0];
         savedMonthDatas.removeAt(0);
         update(['removedDate:$removedDate!']);
-        print('removedDate:$removedDate!');
+        CalendarGlobals.debugLogs('removedDate:$removedDate!');
       } else {
         removedDate = null;
       }
@@ -151,8 +151,8 @@ class MonthBuilderController extends GetxController {
     mSelectedDate = selectedDate;
     //common update Id for date changes
     update([commonUpdateId]);
-    print('old:$oldSelectedDate');
-    print('selcted:$selectedDate');
+    CalendarGlobals.debugLogs('old:$oldSelectedDate');
+    CalendarGlobals.debugLogs('selcted:$selectedDate');
     if (updateByID && oldSelectedDate != null && updateId != null) {
       update([selectedDate, oldSelectedDate, updateId]);
     } else {

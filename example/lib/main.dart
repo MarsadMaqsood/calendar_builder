@@ -4,7 +4,10 @@ import 'package:calendar_builder/calendar_builder.dart';
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  CalendarGlobals.showLogs = true;
+  runApp(const MyApp());
+}
 
 ///Main root of this package
 class MyApp extends StatelessWidget {
@@ -21,7 +24,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//TODO document confi class whcih supports hot reload
 ///Home class
 class CalendarHome extends StatelessWidget {
   ///Home constructor
@@ -35,10 +37,6 @@ class CalendarHome extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // for (var item in colors)
-            // SizedBox(
-            //     height: 100, width: 100, child: ColoredBox(color: item)),
-
             Expanded(
               child: CbMonthBuilder(
                   cbConfig: CbConfig(
