@@ -3,10 +3,8 @@ import '../controllers/month_ui_controller.dart';
 import 'package:get/get.dart';
 
 import '../../calendar_builder.dart';
-import '../models/month_data_model.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/global.dart';
 
 //Todo: Add Image Documentation
 ///A year Drop down class--- default used in [CbMonthBuilder]
@@ -199,7 +197,6 @@ class __YearDropDownState extends State<_YearDropDown>
         //     mCtr.mYearPickerGlobalKey[8].currentContext!);
         // });
         return AnimatedSize(
-          vsync: this,
           curve: Curves.fastOutSlowIn,
           duration: CalendarGlobals.kMinDuration,
           reverseDuration: CalendarGlobals.kMinDuration,
@@ -525,7 +522,7 @@ class __YearButtons extends State<_YearButtons>
                     : widget.isYearselected
                         ? widget.borderColorOnSelected ??
                             (colorTheme.brightness == Brightness.dark
-                                ? colorTheme.accentColor
+                                ? colorTheme.colorScheme.secondary
                                 : Colors.black)
                         : widget.borderColorOnEnabled ?? Colors.grey,
                 width: widget.isyearDisabled

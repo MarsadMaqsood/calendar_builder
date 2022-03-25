@@ -1,5 +1,3 @@
-import 'package:calendar_builder/src/models/cb_config.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../calendar_builder.dart';
 

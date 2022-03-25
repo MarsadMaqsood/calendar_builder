@@ -4,7 +4,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,9 +11,6 @@ import '../../calendar_builder.dart';
 import '../controllers/cb_controller.dart';
 import '../controllers/month_builder_controller.dart';
 import '../controllers/month_ui_controller.dart';
-import '../models/cb_config.dart';
-import '../models/month_data_model.dart';
-import '../utils/global.dart';
 import 'year_drop_down.dart';
 
 ///Month Builder
@@ -426,7 +422,8 @@ class __MonthGridState extends State<_MonthGrid> {
           //     crossAxisCount: 1, mainAxisExtent: 340),
           controller: _scrollController,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: maxCrossAxisExtentCounter(context),
+            maxCrossAxisExtent: widget.monthCustomizer?.monthWidth ??
+                maxCrossAxisExtentCounter(context),
             mainAxisExtent: ((widget.monthCustomizer?.monthHeight ?? 300) +
                 (widget.monthCustomizer?.monthHeaderCustomizer?.height ?? 40) +
                 (widget.monthCustomizer?.monthWeekCustomizer?.height ?? 40)),
@@ -500,7 +497,7 @@ class SingleMonthView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final mCtr = Get.find<MonthBuilderController>(tag: matchId);
 
-    double monthWidth = monthCustomizer?.monthWidth ?? size.width;
+    double monthWidth = size.width;
     double monthHeight = monthCustomizer?.monthHeight ?? 300;
     double buttonHeight = monthHeight / 6;
     late double buttonWidth;
@@ -953,10 +950,12 @@ class _MonthButtons extends StatelessWidget {
                         ? _mBtn?.colorOnDisabled ??
                             colorTheme.disabledColor.withOpacity(0.03)
                         : isHighlighted
-                            ? _mBtn?.highlightedColor ?? colorTheme.accentColor
+                            ? _mBtn?.highlightedColor ??
+                                colorTheme.colorScheme.secondary
                             : isCurrentDay
                                 ? _mBtn?.currentDayColor ??
-                                    colorTheme.accentColor.withOpacity(0.5)
+                                    colorTheme.colorScheme.secondary
+                                        .withOpacity(0.5)
                                 : _mBtn?.borderColorOnEnabled ??
                                     colorTheme.disabledColor.withOpacity(0.05),
                     style: isDisabled
@@ -979,19 +978,21 @@ class _MonthButtons extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     tween: DecorationTween(
                       begin: BoxDecoration(
-                          color:
-                              _mBtn?.colorOnSelected ?? colorTheme.accentColor,
+                          color: _mBtn?.colorOnSelected ??
+                              colorTheme.colorScheme.secondary,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
                                 blurRadius: 5,
                                 color:
                                     _mBtn?.colorOnSelected?.withOpacity(0.6) ??
-                                        colorTheme.accentColor.withOpacity(0.6),
+                                        colorTheme.colorScheme.secondary
+                                            .withOpacity(0.6),
                                 spreadRadius: 3),
                           ]),
                       end: BoxDecoration(
-                        color: _mBtn?.colorOnSelected ?? colorTheme.accentColor,
+                        color: _mBtn?.colorOnSelected ??
+                            colorTheme.colorScheme.secondary,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -1008,7 +1009,7 @@ class _MonthButtons extends StatelessWidget {
                   color: isDisabled
                       ? _mBtn?.eventColorOnDisabled ??
                           colorTheme.disabledColor.withOpacity(0.05)
-                      : _mBtn?.eventColor ?? colorTheme.accentColor,
+                      : _mBtn?.eventColor ?? colorTheme.colorScheme.secondary,
                   style: PaintingStyle.fill,
                   strokeWidth: 0,
                   radius: 3,
