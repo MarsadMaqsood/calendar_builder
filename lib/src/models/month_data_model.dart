@@ -662,13 +662,13 @@ class OnDateSelected {
   final bool isDisabled;
   final bool hasEvent;
   final bool isHighlighted;
-  final bool isCurrentDat;
+  final bool isCurrentDate;
   OnDateSelected({
     required this.selectedDate,
     required this.isSelected,
     required this.isDisabled,
     required this.hasEvent,
     required this.isHighlighted,
-    required this.isCurrentDat,
+    required this.isCurrentDate,
   });
 }

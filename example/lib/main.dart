@@ -45,6 +45,17 @@ class CalendarHome extends StatelessWidget {
                     selectedDate: DateTime(2021),
                     selectedYear: DateTime(2021),
                     weekStartsFrom: WeekStartsFrom.thursday,
+                    eventDates: [
+                      DateTime(2021,1,2),
+                      DateTime(2021,1,2),
+                      DateTime(2021,1,3)
+                    ],
+                    highlightedDates: [
+                      DateTime(2021,1,6),
+                      DateTime(2021,1,3)
+                    ]
+                  ),
+                  monthCustomizer: MonthCustomizer(
                   ),
                   onYearHeaderExpanded: (isExp) {
                     log('isExpanded' + isExp.toString());
@@ -53,6 +64,9 @@ class CalendarHome extends StatelessWidget {
                     log('selected date' +
                         onDateClicked.selectedDate.toString());
                     log('isSelected ' + onDateClicked.isSelected.toString());
+                    log('isHighlighted ' + onDateClicked.isHighlighted.toString());
+                    log('hasEvent ' + onDateClicked.hasEvent.toString());
+                    log('isCurrentDate ' + onDateClicked.isCurrentDate.toString());
                     log('isDisabled ' + onDateClicked.isDisabled.toString());
                   },
                   onYearButtonClicked: (year, isSelected) {

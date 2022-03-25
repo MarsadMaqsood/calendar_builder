@@ -187,6 +187,7 @@ class _CbMonthBuilderState extends State<CbMonthBuilder> {
     if (oldWidget.cbConfig != widget.cbConfig) {
       configDatas(matchingId, useOnHotReload: true);
     }
+    addToUiCtr();
 
     ///
   }
@@ -783,7 +784,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
                             isDisabled: checkDayIsDisabled,
                             hasEvent: checkHasEvent,
                             isHighlighted: checkHighlightedDates,
-                            isCurrentDat: checkCurrentDay,
+                            isCurrentDate: checkCurrentDay,
                           ),
                         );
                       },
@@ -802,7 +803,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
                             isDisabled: checkDayIsDisabled,
                             hasEvent: checkHasEvent,
                             isHighlighted: checkHighlightedDates,
-                            isCurrentDat: checkCurrentDay,
+                            isCurrentDate: checkCurrentDay,
                           ),
                         );
 
