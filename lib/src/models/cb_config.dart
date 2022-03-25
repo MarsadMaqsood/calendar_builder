@@ -1,4 +1,4 @@
-import '../../utils/date_utils_cb.dart';
+import '../utils/date_utils_cb.dart';
 
 ///Global configuration class for [calendar_builder]
 class CbConfig {

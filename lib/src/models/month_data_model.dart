@@ -1,6 +1,7 @@
-import 'package:calendar_builder/calendar_builder.dart';
-import 'package:calendar_builder/utils/date_utils_cb.dart';
 import 'package:flutter/material.dart';
+
+import 'package:calendar_builder/calendar_builder.dart';
+import 'package:calendar_builder/src/utils/date_utils_cb.dart';
 
 ///Year Header Builder
 typedef WidgetCbYearHeader = Widget Function(
@@ -652,5 +653,22 @@ class MonthWeekCustomizer {
     this.height = 40,
     this.textStyle,
     this.weekList,
+  });
+}
+
+class OnDateSelected {
+  final DateTime selectedDate;
+  final bool isSelected;
+  final bool isDisabled;
+  final bool hasEvent;
+  final bool isHighlighted;
+  final bool isCurrentDat;
+  OnDateSelected({
+    required this.selectedDate,
+    required this.isSelected,
+    required this.isDisabled,
+    required this.hasEvent,
+    required this.isHighlighted,
+    required this.isCurrentDat,
   });
 }

@@ -1,4 +1,4 @@
-import 'package:calendar_builder/utils/date_utils_cb.dart';
+import 'package:calendar_builder/src/utils/date_utils_cb.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

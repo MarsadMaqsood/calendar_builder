@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../calendar_builder.dart';
+
 ///this controller is used to controll  the state of the [month_builder] ui
 class MonthUiController extends GetxController {
   ///checking wether the yer picker is expanded or not
@@ -8,6 +10,10 @@ class MonthUiController extends GetxController {
 
   ///Page controller for Month
   late PageController mPageController;
+
+  void Function(bool isExpanded)? onYearHeaderExpanded;
+  void Function(DateTime selectedYear,bool isSelected)? onYearButtonClicked;
+  void Function(OnDateSelected onDateSelected)? onDateClicked;
 
   ///used to chage the expanded or not-expanded , state of year picker
   void chageYearExpanded(

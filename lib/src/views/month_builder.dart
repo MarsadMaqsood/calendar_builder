@@ -1,18 +1,21 @@
+// import 'dart:io';
+
 import 'dart:io';
-
-import '../controllers/cb_controller.dart';
-import '../models/cb_config.dart';
-import 'package:flutter/foundation.dart';
-
-import '../controllers/month_ui_controller.dart';
-import '../controllers/month_builder_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:get/get.dart';
-import '../../calendar_builder.dart';
-import 'year_drop_down.dart';
-import '../models/month_data_model.dart';
 import 'dart:math';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../calendar_builder.dart';
+import '../controllers/cb_controller.dart';
+import '../controllers/month_builder_controller.dart';
+import '../controllers/month_ui_controller.dart';
+import '../models/cb_config.dart';
+import '../models/month_data_model.dart';
+import '../utils/global.dart';
+import 'year_drop_down.dart';
 
 ///Month Builder
 class CbMonthBuilder extends StatefulWidget {
@@ -25,6 +28,9 @@ class CbMonthBuilder extends StatefulWidget {
     this.yearDropDownCustomizer,
     this.monthCustomizer,
     this.cbConfig,
+    this.onYearHeaderExpanded,
+    this.onYearButtonClicked,
+    this.onDateClicked,
   }) : super(key: key);
 
   ///* --
@@ -68,6 +74,10 @@ class CbMonthBuilder extends StatefulWidget {
   ///--- `weekStartsFrom`
   ///
   final CbConfig? cbConfig;
+  final void Function(bool isExpanded)? onYearHeaderExpanded;
+  final void Function(DateTime selectedYear, bool isSelected)?
+      onYearButtonClicked;
+  final void Function(OnDateSelected onDateSelected)? onDateClicked;
 
   @override
   _CbMonthBuilderState createState() => _CbMonthBuilderState();
@@ -116,6 +126,14 @@ class _CbMonthBuilderState extends State<CbMonthBuilder> {
     );
     expandeYearInitially();
     configDatas(matchingId);
+    addToUiCtr();
+  }
+
+  void addToUiCtr() {
+    final mUiCtr = Get.find<MonthUiController>(tag: uiStateTag);
+    mUiCtr.onDateClicked = widget.onDateClicked;
+    mUiCtr.onYearButtonClicked = widget.onYearButtonClicked;
+    mUiCtr.onYearHeaderExpanded = widget.onYearHeaderExpanded;
   }
 
   void configDatas(String matchingId, {bool useOnHotReload = false}) {
@@ -421,6 +439,7 @@ class __MonthGridState extends State<_MonthGrid> {
             // return Text('data');
             return SingleMonthView(
               matchId: widget.matchingId,
+              uiStateTag: widget.uiStateTag,
               monthIndex: index,
               monthCustomizer: widget.monthCustomizer,
               thisSelectedYear: widget.thisSelectedYear,
@@ -433,6 +452,9 @@ class __MonthGridState extends State<_MonthGrid> {
   double maxCrossAxisExtentCounter(BuildContext context) {
     final mq = MediaQuery.of(context);
     final size = mq.size;
+    if (kIsWeb) {
+      return 700;
+    }
     if (mq.orientation == Orientation.portrait &&
         (Platform.isAndroid || Platform.isIOS)) {
       return size.width;
@@ -450,6 +472,7 @@ class SingleMonthView extends StatelessWidget {
   const SingleMonthView({
     Key? key,
     required this.matchId,
+    required this.uiStateTag,
     required this.monthIndex,
     this.monthCustomizer,
     required this.thisSelectedYear,
@@ -458,6 +481,8 @@ class SingleMonthView extends StatelessWidget {
   ///Tags of GetxControllers
   ///Data Tag
   final String matchId;
+  //ui tag
+  final String uiStateTag;
 
   ///index of month 0-12
   final int monthIndex;
@@ -593,6 +618,7 @@ class SingleMonthView extends StatelessWidget {
           width: monthWidth,
           child: _MonthButtonGrid(
             matchId: matchId,
+            uiStateTag: uiStateTag,
             monthHeight: monthHeight,
             monthWidth: monthWidth,
             monthIndex: monthIndex,
@@ -612,15 +638,17 @@ class _MonthButtonGrid extends StatefulWidget {
     Key? key,
     required this.matchId,
     required this.monthHeight,
+    required this.uiStateTag,
     required this.monthWidth,
-    required this.monthIndex,
     required this.buttonChildHeight,
     required this.buttonChildWidth,
     required this.thisSelectedYear,
     this.monthCustomizer,
+    required this.monthIndex,
   }) : super(key: key);
   final String matchId;
   final double monthHeight;
+  final String uiStateTag;
   final double monthWidth;
   final double buttonChildHeight;
   final double buttonChildWidth;
@@ -680,7 +708,6 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
   }
 
   void build42Days({WeekStartsFrom? weekStartsFrom}) {
-    final mCtr = Get.find<MonthBuilderController>(tag: widget.matchId);
     mAll42DaysInMonth = DateUtilsCB.getAll42DaysIn1Month(
       weekStartsFrom: weekStartsFrom ?? WeekStartsFrom.sunday,
       month: DateUtilsCB.getAllMonthsIn1Year(
@@ -738,9 +765,43 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
                 isHighlighted: checkHighlightedDates,
               );
               return checkDayIsDisabled
-                  ? _monthButtons
+                  ? GestureDetector(
+                      onTap: () {
+                        _checkingMonthDays(
+                            index: index, selectedDate: mCtr.mSelectedDate);
+
+                        final mUiCtr =
+                            Get.find<MonthUiController>(tag: widget.uiStateTag);
+                        mUiCtr.onDateClicked?.call(
+                          OnDateSelected(
+                            selectedDate: mAll42DaysInMonth[index],
+                            isSelected: checkDayIsSelected,
+                            isDisabled: checkDayIsDisabled,
+                            hasEvent: checkHasEvent,
+                            isHighlighted: checkHighlightedDates,
+                            isCurrentDat: checkCurrentDay,
+                          ),
+                        );
+                      },
+                      child: _monthButtons)
                   : GestureDetector(
                       onTap: () {
+                        _checkingMonthDays(
+                            index: index, selectedDate: mCtr.mSelectedDate);
+
+                        final mUiCtr =
+                            Get.find<MonthUiController>(tag: widget.uiStateTag);
+                        mUiCtr.onDateClicked?.call(
+                          OnDateSelected(
+                            selectedDate: mAll42DaysInMonth[index],
+                            isSelected: checkDayIsSelected,
+                            isDisabled: checkDayIsDisabled,
+                            hasEvent: checkHasEvent,
+                            isHighlighted: checkHighlightedDates,
+                            isCurrentDat: checkCurrentDay,
+                          ),
+                        );
+
                         ///execute functions
                         mCtr.changeSelectedDate(
                             selectedDate: mAll42DaysInMonth[index],

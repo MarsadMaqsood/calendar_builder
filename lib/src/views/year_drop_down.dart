@@ -6,6 +6,8 @@ import '../../calendar_builder.dart';
 import '../models/month_data_model.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/global.dart';
+
 //Todo: Add Image Documentation
 ///A year Drop down class--- default used in [CbMonthBuilder]
 class CbYearDropDown extends StatefulWidget {
@@ -119,6 +121,7 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
       children: [
         InkWell(
           onTap: () {
+            mUiCtr.onYearHeaderExpanded?.call(!mUiCtr.isYearPickerExpanded);
             mUiCtr.chageYearExpanded(
                 isExpanded: !mUiCtr.isYearPickerExpanded,
                 commonUpdateId: 'commonId',
@@ -485,7 +488,8 @@ class __YearButtons extends State<_YearButtons>
       mCtr.savedMonthRemover(DateTime(widget.thisLoopDate.year,
           widget.thisLoopDate.month, widget.thisLoopDate.day));
     }
-    ;
+    mUiCtr.onYearButtonClicked?.call( widget.thisLoopDate,widget.isyearDisabled?false:true);
+    
   }
 
   @override
