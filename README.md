@@ -25,6 +25,8 @@ Also supports for disabling dates, highlighting dates and displaying events insi
 
 ---
 
+### Support Light and Dark theme
+
 ![](https://user-images.githubusercontent.com/85326522/160261784-e1df931e-5e9a-475c-8bc9-a3957290de1e.gif)
 
 
@@ -73,6 +75,9 @@ class MonthBuilderScreen extends StatelessWidget {
 }
 
 ```
+
+### Demo
+
 ![](https://user-images.githubusercontent.com/85326522/160261779-9b11b4df-24c7-48e4-b3b3-d56b3d36d0e5.gif)
 ## Customised Month Builder
 ----
