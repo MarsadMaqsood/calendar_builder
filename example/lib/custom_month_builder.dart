@@ -146,10 +146,14 @@ class CustomMonthBuilderScreen extends StatelessWidget {
                     }
                     return Container(
                       decoration: BoxDecoration(
-                        color: isDisabled ? Colors.grey[200] : Colors.yellow,
-                        shape: BoxShape.rectangle,
-                        border:hasEvent || isHighlighted? Border.all( color: isHighlighted?Colors.red:Colors.blue,width: 2):null
-                      ),
+                          color: isDisabled ? Colors.grey[200] : Colors.yellow,
+                          shape: BoxShape.rectangle,
+                          border: hasEvent || isHighlighted
+                              ? Border.all(
+                                  color:
+                                      isHighlighted ? Colors.red : Colors.blue,
+                                  width: 2)
+                              : null),
                       margin: const EdgeInsets.all(2),
                       child: daysText,
                     );

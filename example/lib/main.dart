@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
       // darkTheme: ThemeData.dark(),
       routes: {
         '/month_builder': (context) => const MonthBuilderScreen(),
-        '/customized_month_builder': (context) => const CustomizedMonthBuilderScreen(),
+        '/customized_month_builder': (context) =>
+            const CustomizedMonthBuilderScreen(),
         '/custom_month_builder': (context) => const CustomMonthBuilderScreen(),
         // '/fromAsset': (context) => const PlayVideoFromAsset(),
         // '/fromNetwork': (context) => const PlayVideoFromNetwork(),

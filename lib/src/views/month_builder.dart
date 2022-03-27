@@ -1,6 +1,5 @@
 // import 'dart:io';
 
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -483,10 +482,12 @@ class __MonthGridState extends State<_MonthGrid> {
       return 700;
     }
     if (mq.orientation == Orientation.portrait &&
-        (Platform.isAndroid || Platform.isIOS)) {
+        (Theme.of(context).platform == TargetPlatform.android ||
+            Theme.of(context).platform == TargetPlatform.iOS)) {
       return size.width;
     } else if (mq.orientation == Orientation.landscape &&
-        (Platform.isAndroid || Platform.isIOS)) {
+        (Theme.of(context).platform == TargetPlatform.android ||
+            Theme.of(context).platform == TargetPlatform.iOS)) {
       return size.width / 2;
     }
     return 700;

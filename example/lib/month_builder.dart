@@ -15,7 +15,7 @@ class MonthBuilderScreen extends StatelessWidget {
                 cbConfig: CbConfig(
                   startDate: DateTime(2020),
                   endDate: DateTime(2026),
-                  selectedDate: DateTime(2021,3,4),
+                  selectedDate: DateTime(2021, 3, 4),
                   selectedYear: DateTime(2021),
                 ),
               ),
