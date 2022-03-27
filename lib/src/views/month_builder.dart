@@ -70,9 +70,37 @@ class CbMonthBuilder extends StatefulWidget {
   ///--- `weekStartsFrom`
   ///
   final CbConfig? cbConfig;
+
+  ///
+  ///callback when year header is expanded
+  ///
+  ///* ### Sample code
+  ///
+  ///```dart
+  ///  onYearHeaderExpanded: (isExpanded) {},
+  ///```
+  ///{@end-tool}
   final void Function(bool isExpanded)? onYearHeaderExpanded;
+
+  /// callback when year button is clicked
+  ///
+  ///* ### Sample code
+  ///
+  ///```dart
+  ///  onYearHeaderExpanded: (isExpanded) {},
+  ///```
+  ///{@end-tool}
   final void Function(DateTime selectedYear, bool isSelected)?
       onYearButtonClicked;
+
+  /// callback when date button is clicked
+  ///
+  ///* ### Sample code
+  ///
+  ///```dart
+  /// onDateClicked: (onDateClicked) {},
+  ///```
+  ///{@end-tool}
   final void Function(OnDateSelected onDateSelected)? onDateClicked;
 
   @override
@@ -480,7 +508,8 @@ class SingleMonthView extends StatelessWidget {
   ///Tags of GetxControllers
   ///Data Tag
   final String matchId;
-  //ui tag
+
+  ///ui tag
   final String uiStateTag;
 
   ///index of month 0-12

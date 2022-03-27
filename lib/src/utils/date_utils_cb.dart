@@ -165,11 +165,10 @@ class DateUtilsCB {
     //   allDates: allDates,
     // );
     ///!replaced
-    List<DateTime> _listOfDatesInYear =
-        DateUtilsCB.getAllDaysInBetweenYears(
-            startDate: DateTime(selectedYear.year),
-            endDate: DateTime(selectedYear.year + 1)
-                .subtract(const Duration(days: 1)));
+    List<DateTime> _listOfDatesInYear = DateUtilsCB.getAllDaysInBetweenYears(
+        startDate: DateTime(selectedYear.year),
+        endDate:
+            DateTime(selectedYear.year + 1).subtract(const Duration(days: 1)));
 
     ///genrating Dates in each months as List<DateTime>
     List<DateTime> _listOfJan = _listOfDatesInYear

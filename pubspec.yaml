@@ -1,7 +1,7 @@
 name: calendar_builder
-description: A new Flutter package project.
+description: Fully customizable calendar package for flutter.Also supports for disabling dates, highlighting dates and displaying events inside calendar.
 version: 0.0.1
-homepage:
+homepage: https://github.com/newtaDev/calendar_builder
 
 environment:
   sdk: ">=2.16.1 <3.0.0"

@@ -64,8 +64,8 @@ class MonthBuilderController extends GetxController {
   ///all month start up logic
   void _logicInitialization() {
     ///alll the dates form [mStartDate] to [mEndDate]
-    mStartToEndDates = DateUtilsCB.getDaysInBeteween(
-        startDate: mStartDate, endDate: mEndDate);
+    mStartToEndDates =
+        DateUtilsCB.getDaysInBeteween(startDate: mStartDate, endDate: mEndDate);
 
     ///all the dates in each the year
     mAllDates = DateUtilsCB.getAllDaysInBetweenYears(
@@ -108,7 +108,7 @@ class MonthBuilderController extends GetxController {
 
   ///For Improving Performace
   ///to check wether the saved month size exceeds 3
-  ///if excedes it removes previous cached datas 
+  ///if excedes it removes previous cached datas
   void savedMonthRemover(DateTime date) {
     CalendarGlobals.debugLogs('-----$date');
     if (savedMonthDatas.length > 3) {

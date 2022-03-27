@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 ///easy Mod of [OutlinedButton]
 class ModOutlineButton extends StatelessWidget {
+  ///easy Mod of [OutlinedButton]
   const ModOutlineButton({
     Key? key,
     required this.height,
@@ -13,18 +14,25 @@ class ModOutlineButton extends StatelessWidget {
     this.overlayColor,
   }) : super(key: key);
 
+  ///Height of button
   final double height;
 
+  ///Width  of button
   final double width;
 
+  ///Callback on button pressed
   final VoidCallback? onPressed;
 
+  /// Shape of button
   final OutlinedBorder? shape;
 
+  /// set border forbutton
   final BorderSide? borderSide;
 
+  /// add Child widget
   final Widget child;
 
+  /// Overlay color of button
   final Color? overlayColor;
 
   OutlinedBorder _handelButtonShape(Set<MaterialState> state) {

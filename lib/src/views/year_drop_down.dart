@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../calendar_builder.dart';
 import 'package:flutter/material.dart';
 
-
 //Todo: Add Image Documentation
 ///A year Drop down class--- default used in [CbMonthBuilder]
 class CbYearDropDown extends StatefulWidget {
@@ -93,10 +92,10 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
               tag: matchingId,
               id: 'dateChangeId',
               builder: (mCtr) {
-                String preMonth =
-                    mCtr.mSelectedDate.year == mCtr.mSelectedYear.year
-                        ? '${CalendarGlobals.months[mCtr.mSelectedDate.month - 1]} - '
-                        : '';
+                String preMonth = mCtr.mSelectedDate.year ==
+                        mCtr.mSelectedYear.year
+                    ? '${CalendarGlobals.months[mCtr.mSelectedDate.month - 1]} - '
+                    : '';
                 String year = '$preMonth${mCtr.mSelectedYear.year}';
                 return Text(
                   year,
@@ -485,8 +484,8 @@ class __YearButtons extends State<_YearButtons>
       mCtr.savedMonthRemover(DateTime(widget.thisLoopDate.year,
           widget.thisLoopDate.month, widget.thisLoopDate.day));
     }
-    mUiCtr.onYearButtonClicked?.call( widget.thisLoopDate,widget.isyearDisabled?false:true);
-    
+    mUiCtr.onYearButtonClicked
+        ?.call(widget.thisLoopDate, widget.isyearDisabled ? false : true);
   }
 
   @override

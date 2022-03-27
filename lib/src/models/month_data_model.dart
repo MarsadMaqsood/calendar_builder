@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 ///Year Header Builder
 typedef WidgetCbYearHeader = Widget Function(
   bool isYearPickerExpanded,
@@ -162,7 +161,7 @@ class YearDropDownCustomizer {
   ///Build your custom YearDropDown Header
   ///
   ///* NOTE: COPY & PASTE
-  ///*### Sample code
+  ///* ### Sample code
   ///
   /// ```dart
   /// yearHeaderBuilder: (isYearPickerExpanded, selectedDate, selectedYear, year) {
@@ -191,7 +190,7 @@ class YearDropDownCustomizer {
   ///Build your own year buttons
   ///
   ///* NOTE: COPY & PASTE
-  ///*### Sample code
+  ///* ### Sample code
   ///
   /// ```dart
   /// yearButtonBuilder: (dateTime, heightResponsive,widthResponsive, isyearDisabled, isYearselected) {
@@ -398,7 +397,7 @@ class MonthCustomizer {
   ///Build your own month buttons
   ///
   ///* NOTE: COPY & PASTE
-  ///*### Sample code
+  ///* ### Sample code
   ///
   /// ```dart
   ///  monthButtonBuilder: (dateTime,childHeight,childWidth,isSelected,isDisabled,hasEvent,isHighlighted,isCurrentDay) {
@@ -514,7 +513,7 @@ class MonthCustomizer {
   ///Build your own weeks
   ///
   ///* NOTE: COPY & PASTE
-  ///*### Sample code
+  ///* ### Sample code
   ///
   /// ```dart
   /// monthWeekBuilder: (index, weeks, weekHeight, weekWidth) {
@@ -544,7 +543,7 @@ class MonthCustomizer {
   ///Build your own month Headers
   ///
   ///* NOTE: COPY & PASTE
-  ///*### Sample code
+  ///* ### Sample code
   ///
   /// ```dart
   /// monthHeaderBuilder:
@@ -654,13 +653,27 @@ class MonthWeekCustomizer {
   });
 }
 
+///OnDateSelected
 class OnDateSelected {
+  ///Selected data on calendar
   final DateTime selectedDate;
+
+  ///return true if Selected date is equal
   final bool isSelected;
+
+  ///return true if Selected date is disabled
   final bool isDisabled;
+
+  ///return true if Selected date has event
   final bool hasEvent;
+
+  ///return true if Selected date is highlighted
   final bool isHighlighted;
+
+  ///return true if Selected date is current day
   final bool isCurrentDate;
+
+  /// constructor of OnDateSelected
   OnDateSelected({
     required this.selectedDate,
     required this.isSelected,

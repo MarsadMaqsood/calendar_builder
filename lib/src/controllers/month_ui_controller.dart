@@ -11,8 +11,13 @@ class MonthUiController extends GetxController {
   ///Page controller for Month
   late PageController mPageController;
 
+  ///callback when year header is expanded
   void Function(bool isExpanded)? onYearHeaderExpanded;
-  void Function(DateTime selectedYear,bool isSelected)? onYearButtonClicked;
+
+  /// callback when year button is clicked
+  void Function(DateTime selectedYear, bool isSelected)? onYearButtonClicked;
+
+  /// callback when date button is clicked
   void Function(OnDateSelected onDateSelected)? onDateClicked;
 
   ///used to chage the expanded or not-expanded , state of year picker

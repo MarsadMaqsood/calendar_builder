@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 
 ///A global theme classs for all colors [Theme]
 class CalendarGlobals {
+  ///Minumum duration
   static const kMinDuration = Duration(milliseconds: 400);
+
+  ///maximum duration
   static const kMaxDuration = Duration(milliseconds: 800);
+
+  ///orange color
   static const Color kOrange = Color(0xffFF5917);
+
+  ///list of months
   static const List<String> months = [
     'January',
     'February',
@@ -19,6 +26,8 @@ class CalendarGlobals {
     'November',
     'December',
   ];
+
+  ///list of Weeks
   static const List<List<String>> weeksStarter = [
     [
       'MON',
@@ -84,7 +93,11 @@ class CalendarGlobals {
       'SAT',
     ],
   ];
+
+  ///Enable or disable dev logs
   static bool showLogs = false;
+
+  ///Enable or disable dev logs
   static void debugLogs(Object _log) {
     if (showLogs) debugPrint(_log.toString());
   }
