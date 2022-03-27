@@ -1,3 +1,6 @@
+## 0.0.6
+
+* web, compile issue fix
 ## 0.0.5
 
 * improve pub score

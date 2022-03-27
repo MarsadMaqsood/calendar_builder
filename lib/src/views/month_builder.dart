@@ -11,7 +11,6 @@ import '../controllers/cb_controller.dart';
 import '../controllers/month_builder_controller.dart';
 import '../controllers/month_ui_controller.dart';
 import 'year_drop_down.dart';
-import 'dart:io' if (dart.library.html) 'dart:html';
 
 ///Month Builder
 class CbMonthBuilder extends StatefulWidget {
@@ -483,10 +482,12 @@ class __MonthGridState extends State<_MonthGrid> {
       return 700;
     }
     if (mq.orientation == Orientation.portrait &&
-        (Platform.isAndroid || Platform.isIOS)) {
+        (Theme.of(context).platform == TargetPlatform.android ||
+            Theme.of(context).platform == TargetPlatform.iOS)) {
       return size.width;
     } else if (mq.orientation == Orientation.landscape &&
-        (Platform.isAndroid || Platform.isIOS)) {
+        (Theme.of(context).platform == TargetPlatform.android ||
+            Theme.of(context).platform == TargetPlatform.iOS)) {
       return size.width / 2;
     }
     return 700;
