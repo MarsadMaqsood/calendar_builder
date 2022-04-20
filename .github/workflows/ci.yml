@@ -26,7 +26,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Get dependencies for example
         run: flutter pub get
-        working-directory: example
       - name: Lint using flutter analyze
         run: flutter analyze
   pana:
@@ -36,12 +35,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: subosito/flutter-action@v1.5.3
-
       - name: Install Dependencies
         run: |
           flutter packages get
           flutter pub global activate pana
       - name: Verify Pub Score
-        run: ../../tools/verify_pub_remote.sh
+        run: pana . --no-warning
         
