@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-format:
+      name: Check format using flutter format
+      runs-on: ubuntu-latest
+      container: cirrusci/flutter:stable
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Check format
+          run: flutter format --set-exit-if-changed .
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container: cirrusci/flutter:stable
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get dependencies for example
+        run: flutter pub get
+        working-directory: example
+      - name: Lint using flutter analyze
+        run: flutter analyze
+  pana:
+    name: pana analyse
+    runs-on: ubuntu-latest
+    container: cirrusci/flutter:stable
+    
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: subosito/flutter-action@v1.5.3
+
+      - name: Install Dependencies
+        run: |
+          flutter packages get
+          flutter pub global activate pana
+      - name: Verify Pub Score
+        run: ../../tools/verify_pub_remote.sh
+        
