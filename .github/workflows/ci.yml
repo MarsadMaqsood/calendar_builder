@@ -28,17 +28,4 @@ jobs:
         run: flutter pub get
       - name: Lint using flutter analyze
         run: flutter analyze
-  pana:
-    name: pana analyse
-    runs-on: ubuntu-latest
-    container: cirrusci/flutter:stable
-    
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - name: Install Dependencies
-        run: |
-          flutter packages get
-          flutter pub global activate pana
-      - name: Verify Pub Score
-        run: pana . --no-warning
         
