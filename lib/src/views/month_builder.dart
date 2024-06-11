@@ -16,7 +16,7 @@ import 'year_drop_down.dart';
 class CbMonthBuilder extends StatefulWidget {
   ///constructor of month builder
   const CbMonthBuilder({
-    Key? key,
+    super.key,
     this.matchId,
     this.height,
     this.width,
@@ -26,7 +26,7 @@ class CbMonthBuilder extends StatefulWidget {
     this.onYearHeaderExpanded,
     this.onYearButtonClicked,
     this.onDateClicked,
-  }) : super(key: key);
+  });
 
   ///* --
   ///*#### NOTE: if you are changing matchId then,  PLEASE DOO HOT RESTART
@@ -78,7 +78,6 @@ class CbMonthBuilder extends StatefulWidget {
   ///```dart
   ///  onYearHeaderExpanded: (isExpanded) {},
   ///```
-  ///{@end-tool}
   final void Function(bool isExpanded)? onYearHeaderExpanded;
 
   /// callback when year button is clicked
@@ -88,7 +87,6 @@ class CbMonthBuilder extends StatefulWidget {
   ///```dart
   ///  onYearHeaderExpanded: (isExpanded) {},
   ///```
-  ///{@end-tool}
   final void Function(DateTime selectedYear, bool isSelected)?
       onYearButtonClicked;
 
@@ -99,11 +97,10 @@ class CbMonthBuilder extends StatefulWidget {
   ///```dart
   /// onDateClicked: (onDateClicked) {},
   ///```
-  ///{@end-tool}
   final void Function(OnDateSelected onDateSelected)? onDateClicked;
 
   @override
-  _CbMonthBuilderState createState() => _CbMonthBuilderState();
+  State<StatefulWidget> createState() => _CbMonthBuilderState();
 }
 
 class _CbMonthBuilderState extends State<CbMonthBuilder> {
@@ -236,9 +233,9 @@ class _CbMonthBuilderState extends State<CbMonthBuilder> {
     });
 
     ///changes the page of month pageView
-    int _mPage =
+    int mPage =
         mCtr.mAllYears.indexWhere((element) => element.year == newDate.year);
-    mUiCtr.mPageController.jumpToPage(_mPage);
+    mUiCtr.mPageController.jumpToPage(mPage);
 
     ///saves and removes months if length exedes 3
     mCtr.addToSavedMonthDates(
@@ -296,13 +293,13 @@ class _CbMonthBuilderState extends State<CbMonthBuilder> {
 
 class _MonthView extends StatefulWidget {
   const _MonthView({
-    Key? key,
+    super.key,
     required this.matchingId,
     required this.cbMonthHeight,
     this.yearDropDownCustomizer,
     this.monthCustomizer,
     required this.uiStateTag,
-  }) : super(key: key);
+  });
 
   final String matchingId;
   final double cbMonthHeight;
@@ -324,10 +321,10 @@ class __MonthViewState extends State<_MonthView> {
   void pageInitialise() {
     final mUiCtr = Get.find<MonthUiController>(tag: widget.uiStateTag);
     final mCtr = Get.find<MonthBuilderController>(tag: widget.matchingId);
-    int _initialPage = mCtr.mAllYears
+    int initialPage = mCtr.mAllYears
         .indexWhere((element) => element.year == mCtr.mSelectedYear.year);
     mUiCtr.mPageController =
-        PageController(initialPage: _initialPage, keepPage: true);
+        PageController(initialPage: initialPage, keepPage: true);
     mCtr.addToSavedMonthDates(DateTime(mCtr.mSelectedYear.year,
         mCtr.mSelectedYear.month, mCtr.mSelectedYear.day));
     //  thisSelectedYear = DateTime(mCtr.mSelectedYear.year,
@@ -356,7 +353,7 @@ class __MonthViewState extends State<_MonthView> {
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         DateTime thisSelectedYear = mCtr.mAllYears.elementAt(index);
-        Widget _monthGrid() {
+        Widget monthGrid() {
           return _MonthGrid(
             matchingId: widget.matchingId,
             uiStateTag: widget.uiStateTag,
@@ -373,7 +370,7 @@ class __MonthViewState extends State<_MonthView> {
               CalendarGlobals.debugLogs(thisSelectedYear);
               return mCtr.removedDate == thisSelectedYear
                   ? const SizedBox()
-                  : _monthGrid();
+                  : monthGrid();
             });
       },
     );
@@ -382,12 +379,12 @@ class __MonthViewState extends State<_MonthView> {
 
 class _MonthGrid extends StatefulWidget {
   const _MonthGrid({
-    Key? key,
+    super.key,
     required this.matchingId,
     required this.uiStateTag,
     required this.thisSelectedYear,
     this.monthCustomizer,
-  }) : super(key: key);
+  });
   final String matchingId;
   final String uiStateTag;
   final MonthCustomizer? monthCustomizer;
@@ -498,13 +495,13 @@ class __MonthGridState extends State<_MonthGrid> {
 class SingleMonthView extends StatelessWidget {
   ///
   const SingleMonthView({
-    Key? key,
+    super.key,
     required this.matchId,
     required this.uiStateTag,
     required this.monthIndex,
     this.monthCustomizer,
     required this.thisSelectedYear,
-  }) : super(key: key);
+  });
 
   ///Tags of GetxControllers
   ///Data Tag
@@ -667,7 +664,7 @@ class SingleMonthView extends StatelessWidget {
 
 class _MonthButtonGrid extends StatefulWidget {
   const _MonthButtonGrid({
-    Key? key,
+    super.key,
     required this.matchId,
     required this.monthHeight,
     required this.uiStateTag,
@@ -677,7 +674,7 @@ class _MonthButtonGrid extends StatefulWidget {
     required this.thisSelectedYear,
     this.monthCustomizer,
     required this.monthIndex,
-  }) : super(key: key);
+  });
   final String matchId;
   final double monthHeight;
   final String uiStateTag;
@@ -784,7 +781,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
               // Global.debugLogs('grid Btn $index month${widget.monthIndex}');
               _checkingMonthDays(
                   index: index, selectedDate: mCtr.mSelectedDate);
-              var _monthButtons = _MonthButtons(
+              var monthButtons = _MonthButtons(
                 mAll42DaysInMonth: mAll42DaysInMonth,
                 index: index,
                 isDisabled: checkDayIsDisabled,
@@ -815,7 +812,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
                           ),
                         );
                       },
-                      child: _monthButtons)
+                      child: monthButtons)
                   : GestureDetector(
                       onTap: () {
                         _checkingMonthDays(
@@ -854,7 +851,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
                       },
                       behavior: HitTestBehavior.opaque,
                       //Parent Container
-                      child: _monthButtons);
+                      child: monthButtons);
             });
       },
     );
@@ -921,7 +918,7 @@ class __MonthButtonGridState extends State<_MonthButtonGrid>
 
 class _MonthButtons extends StatelessWidget {
   const _MonthButtons({
-    Key? key,
+    super.key,
     required this.mAll42DaysInMonth,
     required this.index,
     required this.isDisabled,
@@ -932,7 +929,7 @@ class _MonthButtons extends StatelessWidget {
     required this.buttonChildWidth,
     required this.hasEvent,
     this.monthCustomizer,
-  }) : super(key: key);
+  });
 
   final List<DateTime> mAll42DaysInMonth;
   final int index;
@@ -948,26 +945,26 @@ class _MonthButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final txtTheme = Theme.of(context).textTheme;
-    final MonthButtonCustomizer? _mBtn = monthCustomizer?.monthButtonCustomizer;
+    final MonthButtonCustomizer? mBtn = monthCustomizer?.monthButtonCustomizer;
     final colorTheme = Theme.of(context);
 
     var daysText = Align(
         child: Text(
       '${mAll42DaysInMonth[index].day}',
       style: isDisabled
-          ? _mBtn?.textStyleOnDisabled ?? txtTheme.caption
+          ? mBtn?.textStyleOnDisabled ?? txtTheme.bodySmall
           : isSelected
-              ? _mBtn?.textStyleOnSelected ??
-                  txtTheme.bodyText1!.copyWith(
+              ? mBtn?.textStyleOnSelected ??
+                  txtTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colorTheme.brightness == Brightness.dark
                           ? Colors.black
                           : Colors.white)
               : isHighlighted
-                  ? _mBtn?.highlightedTextStyle ?? txtTheme.bodyText2
+                  ? mBtn?.highlightedTextStyle ?? txtTheme.bodyMedium
                   : isCurrentDay
-                      ? _mBtn?.currentDayTextStyle ?? txtTheme.bodyText2
-                      : _mBtn?.textStyleOnEnabled ?? txtTheme.bodyText2,
+                      ? mBtn?.currentDayTextStyle ?? txtTheme.bodyMedium
+                      : mBtn?.textStyleOnEnabled ?? txtTheme.bodyMedium,
     ));
     var ifBuilderIsEmpty = Stack(
       alignment: Alignment.center,
@@ -977,28 +974,28 @@ class _MonthButtons extends StatelessWidget {
                 size: Size(buttonChildHeight, buttonChildWidth),
                 painter: CirclePainter(
                     color: isDisabled
-                        ? _mBtn?.colorOnDisabled ??
+                        ? mBtn?.colorOnDisabled ??
                             colorTheme.disabledColor.withOpacity(0.03)
                         : isHighlighted
-                            ? _mBtn?.highlightedColor ??
+                            ? mBtn?.highlightedColor ??
                                 colorTheme.colorScheme.secondary
                             : isCurrentDay
-                                ? _mBtn?.currentDayColor ??
+                                ? mBtn?.currentDayColor ??
                                     colorTheme.colorScheme.secondary
                                         .withOpacity(0.5)
-                                : _mBtn?.borderColorOnEnabled ??
+                                : mBtn?.borderColorOnEnabled ??
                                     colorTheme.disabledColor.withOpacity(0.05),
                     style: isDisabled
-                        ? _mBtn?.paintStyleOnDisabled ?? PaintingStyle.fill
+                        ? mBtn?.paintStyleOnDisabled ?? PaintingStyle.fill
                         : isHighlighted
-                            ? _mBtn?.highlightedPaintingStyle ??
+                            ? mBtn?.highlightedPaintingStyle ??
                                 PaintingStyle.stroke
                             : isCurrentDay
-                                ? _mBtn?.currentDayPaintingStyle ??
+                                ? mBtn?.currentDayPaintingStyle ??
                                     PaintingStyle.fill
-                                : _mBtn?.paintStyleOnEnabled ??
+                                : mBtn?.paintStyleOnEnabled ??
                                     PaintingStyle.stroke,
-                    strokeWidth: _mBtn?.borderStrokeWidth ?? 1,
+                    strokeWidth: mBtn?.borderStrokeWidth ?? 1,
                     radius: buttonChildHeight / 2),
                 child: daysText)
             : SizedBox(
@@ -1008,20 +1005,20 @@ class _MonthButtons extends StatelessWidget {
                     duration: const Duration(milliseconds: 200),
                     tween: DecorationTween(
                       begin: BoxDecoration(
-                          color: _mBtn?.colorOnSelected ??
+                          color: mBtn?.colorOnSelected ??
                               colorTheme.colorScheme.secondary,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
                                 blurRadius: 5,
                                 color:
-                                    _mBtn?.colorOnSelected?.withOpacity(0.6) ??
+                                    mBtn?.colorOnSelected?.withOpacity(0.6) ??
                                         colorTheme.colorScheme.secondary
                                             .withOpacity(0.6),
                                 spreadRadius: 3),
                           ]),
                       end: BoxDecoration(
-                        color: _mBtn?.colorOnSelected ??
+                        color: mBtn?.colorOnSelected ??
                             colorTheme.colorScheme.secondary,
                         shape: BoxShape.circle,
                       ),
@@ -1037,9 +1034,9 @@ class _MonthButtons extends StatelessWidget {
             child: CustomPaint(
               painter: CirclePainter(
                   color: isDisabled
-                      ? _mBtn?.eventColorOnDisabled ??
+                      ? mBtn?.eventColorOnDisabled ??
                           colorTheme.disabledColor.withOpacity(0.05)
-                      : _mBtn?.eventColor ?? colorTheme.colorScheme.secondary,
+                      : mBtn?.eventColor ?? colorTheme.colorScheme.secondary,
                   style: PaintingStyle.fill,
                   strokeWidth: 0,
                   radius: 3,

@@ -1,16 +1,16 @@
-import '../controllers/month_builder_controller.dart';
-import '../controllers/month_ui_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../calendar_builder.dart';
-import 'package:flutter/material.dart';
+import '../controllers/month_builder_controller.dart';
+import '../controllers/month_ui_controller.dart';
 
 //Todo: Add Image Documentation
 ///A year Drop down class--- default used in [CbMonthBuilder]
 class CbYearDropDown extends StatefulWidget {
   ///
   const CbYearDropDown({
-    Key? key,
+    super.key,
     this.matchId,
     this.yearHeaderCustomizer,
     this.yearHeaderBuilder,
@@ -19,7 +19,7 @@ class CbYearDropDown extends StatefulWidget {
     this.uiStateTag,
     this.expandedYearHeight = 200,
     this.expandedYearWidth,
-  }) : super(key: key);
+  });
 
   /// if u want to use same data between your Calendar Builder  -- make sure to give same [matchId]
   final String? matchId;
@@ -81,7 +81,7 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
     final mUiCtr = Get.find<MonthUiController>(tag: uiStateTag);
     final size = MediaQuery.of(context).size;
 
-    Widget _ifBuilderEmpty = SizedBox(
+    Widget ifBuilderEmpty = SizedBox(
       height: widget.yearHeaderCustomizer?.height ?? 40,
       width: widget.yearHeaderCustomizer?.width ?? size.width,
       child: Row(
@@ -125,7 +125,7 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
                 updateId: 'monthExpanded');
           },
           child: widget.yearHeaderBuilder == null
-              ? _ifBuilderEmpty
+              ? ifBuilderEmpty
               : GetBuilder<MonthUiController>(
                   id: 'monthExpanded',
                   tag: uiStateTag,
@@ -162,14 +162,14 @@ class _CbYearDropDownState extends State<CbYearDropDown> {
 
 class _YearDropDown extends StatefulWidget {
   const _YearDropDown({
-    Key? key,
+    super.key,
     required this.matchId,
     required this.uiStateTag,
     required this.height,
     required this.width,
     this.yearButtonBuilder,
     this.yearButtonCustomizer,
-  }) : super(key: key);
+  });
 
   final String matchId;
   final String uiStateTag;
@@ -233,7 +233,7 @@ class __YearDropDownState extends State<_YearDropDown>
 
 class _YearBtnGridBuilder extends StatefulWidget {
   const _YearBtnGridBuilder({
-    Key? key,
+    super.key,
     required this.height,
     required this.width,
     required this.mCtr,
@@ -242,7 +242,7 @@ class _YearBtnGridBuilder extends StatefulWidget {
     required this.uiStateTag,
     this.yearButtonBuilder,
     this.yearButtonCustomizer,
-  }) : super(key: key);
+  });
 
   final double height;
   final double width;
@@ -393,7 +393,7 @@ class __YearBtnGridBuilderState extends State<_YearBtnGridBuilder>
 
 class _YearButtons extends StatefulWidget {
   const _YearButtons({
-    Key? key,
+    super.key,
     required this.isyearDisabled,
     required this.thisLoopDate,
     required this.isYearselected,
@@ -412,7 +412,7 @@ class _YearButtons extends StatefulWidget {
     this.hoverColor,
     this.onPressed,
     this.shrinkOnButtonPressed = true,
-  }) : super(key: key);
+  });
 
   final bool isyearDisabled;
   final DateTime thisLoopDate;
@@ -474,9 +474,9 @@ class __YearButtons extends State<_YearButtons>
       }
 
       ///changes the page of month pageView
-      int _mPage = mCtr.mAllYears
+      int mPage = mCtr.mAllYears
           .indexWhere((element) => element.year == widget.thisLoopDate.year);
-      mUiCtr.mPageController.jumpToPage(_mPage);
+      mUiCtr.mPageController.jumpToPage(mPage);
 
       ///saves and removes months if length exedes 3
       mCtr.addToSavedMonthDates(DateTime(mCtr.mSelectedYear.year,
@@ -534,12 +534,12 @@ class __YearButtons extends State<_YearButtons>
             fit: BoxFit.scaleDown,
             child: Text(widget.thisLoopDate.year.toString(),
                 style: widget.isyearDisabled
-                    ? txtTheme.caption!
+                    ? txtTheme.bodySmall!
                         .copyWith(color: widget.textColorOnDisabled)
                     : widget.isYearselected
-                        ? txtTheme.button!
+                        ? txtTheme.labelLarge!
                             .copyWith(color: widget.textColorOnSelected)
-                        : txtTheme.button!
+                        : txtTheme.labelLarge!
                             .copyWith(color: widget.textColorOnEnabled)),
           ),
         ),

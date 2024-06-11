@@ -16,9 +16,9 @@ void main() {
     ];
 
     ///
-    DateTime _year = DateTime.now();
+    DateTime year = DateTime.now();
     List<Map<String, List<DateTime>>> monthsInaYear =
-        DateUtilsCB.getAllMonthsIn1Year(selectedYear: _year);
+        DateUtilsCB.getAllMonthsIn1Year(selectedYear: year);
 
     ///!getDaysInBeteween Test
     test('getDaysInBeteween', () {
@@ -99,11 +99,11 @@ void main() {
       expect(monthsInaYear.length, 12);
 
       ///Checks for first month day (ie, Jan-1) is equal to  `DateTime(_year.year)` this date or not
-      expect(monthsInaYear.first.values.first.first, DateTime(_year.year));
+      expect(monthsInaYear.first.values.first.first, DateTime(year.year));
 
       ///Checks for last month, last day (ie, Dec-30/31) is equal to  `DateTime(_year.year + 1).subtract(const Duration(days: 1))` this date or not
       expect(monthsInaYear.last.values.last.last,
-          DateTime(_year.year + 1).subtract(const Duration(days: 1)));
+          DateTime(year.year + 1).subtract(const Duration(days: 1)));
     });
 
     ///!getAll42DaysIn1Month Test

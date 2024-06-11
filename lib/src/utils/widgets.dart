@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ModOutlineButton extends StatelessWidget {
   ///easy Mod of [OutlinedButton]
   const ModOutlineButton({
-    Key? key,
+    super.key,
     required this.height,
     required this.width,
     this.onPressed,
@@ -12,7 +12,7 @@ class ModOutlineButton extends StatelessWidget {
     this.borderSide,
     required this.child,
     this.overlayColor,
-  }) : super(key: key);
+  });
 
   ///Height of button
   final double height;
@@ -35,11 +35,11 @@ class ModOutlineButton extends StatelessWidget {
   /// Overlay color of button
   final Color? overlayColor;
 
-  OutlinedBorder _handelButtonShape(Set<MaterialState> state) {
+  OutlinedBorder _handelButtonShape(Set<WidgetState> state) {
     return shape ?? const StadiumBorder();
   }
 
-  BorderSide _handelBorderSide(Set<MaterialState> state) {
+  BorderSide _handelBorderSide(Set<WidgetState> state) {
     return borderSide ??
         BorderSide(
           color: Colors.grey[300]!,
@@ -56,10 +56,10 @@ class ModOutlineButton extends StatelessWidget {
         child: OutlinedButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            shape: MaterialStateProperty.resolveWith(_handelButtonShape),
-            overlayColor: MaterialStateProperty.all<Color>(
+            shape: WidgetStateProperty.resolveWith(_handelButtonShape),
+            overlayColor: WidgetStateProperty.all<Color>(
                 overlayColor ?? Colors.blue[100]!),
-            side: MaterialStateProperty.resolveWith(_handelBorderSide),
+            side: WidgetStateProperty.resolveWith(_handelBorderSide),
           ),
           child: child,
         ),
@@ -99,13 +99,13 @@ class CirclePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final _paint = Paint()
+    final paint = Paint()
       ..strokeWidth = strokeWidth
       ..color = color
       ..style = style;
 
     canvas.drawCircle(
-        offset ?? Offset((size.width / 2), (size.height / 2)), radius, _paint);
+        offset ?? Offset((size.width / 2), (size.height / 2)), radius, paint);
   }
 
   @override

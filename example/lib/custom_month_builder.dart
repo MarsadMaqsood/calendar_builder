@@ -118,20 +118,21 @@ class CustomMonthBuilderScreen extends StatelessWidget {
                       child: Text(
                         '${dateTime.day}',
                         style: isDisabled
-                            ? txtTheme.caption
+                            ? txtTheme.bodySmall
                             : isSelected
-                                ? txtTheme.bodyText1!.copyWith(
+                                ? txtTheme.bodyLarge!.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color:
                                         colorTheme.brightness == Brightness.dark
                                             ? Colors.black
                                             : Colors.white)
                                 : isHighlighted
-                                    ? txtTheme.bodyText2 //Highlighted TextStyle
+                                    ? txtTheme
+                                        .bodyMedium //Highlighted TextStyle
                                     : isCurrentDay
                                         ? txtTheme
-                                            .bodyText2 //CurrentDay TextStyle
-                                        : txtTheme.bodyText2,
+                                            .bodyMedium //CurrentDay TextStyle
+                                        : txtTheme.bodyMedium,
                       ),
                     );
                     if (isSelected) {

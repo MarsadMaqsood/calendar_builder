@@ -165,63 +165,63 @@ class DateUtilsCB {
     //   allDates: allDates,
     // );
     ///!replaced
-    List<DateTime> _listOfDatesInYear = DateUtilsCB.getAllDaysInBetweenYears(
+    List<DateTime> listOfDatesInYear = DateUtilsCB.getAllDaysInBetweenYears(
         startDate: DateTime(selectedYear.year),
         endDate:
             DateTime(selectedYear.year + 1).subtract(const Duration(days: 1)));
 
     ///genrating Dates in each months as List<DateTime>
-    List<DateTime> _listOfJan = _listOfDatesInYear
+    List<DateTime> listOfJan = listOfDatesInYear
         .where((element) => element.month == DateTime.january)
         .toList();
-    List<DateTime> _listOfFeb = _listOfDatesInYear
+    List<DateTime> listOfFeb = listOfDatesInYear
         .where((element) => element.month == DateTime.february)
         .toList();
-    List<DateTime> _listOfMarch = _listOfDatesInYear
+    List<DateTime> listOfMarch = listOfDatesInYear
         .where((element) => element.month == DateTime.march)
         .toList();
-    List<DateTime> _listOfApril = _listOfDatesInYear
+    List<DateTime> listOfApril = listOfDatesInYear
         .where((element) => element.month == DateTime.april)
         .toList();
-    List<DateTime> _listOfMay = _listOfDatesInYear
+    List<DateTime> listOfMay = listOfDatesInYear
         .where((element) => element.month == DateTime.may)
         .toList();
-    List<DateTime> _listOfJune = _listOfDatesInYear
+    List<DateTime> listOfJune = listOfDatesInYear
         .where((element) => element.month == DateTime.june)
         .toList();
-    List<DateTime> _listOfJuly = _listOfDatesInYear
+    List<DateTime> listOfJuly = listOfDatesInYear
         .where((element) => element.month == DateTime.july)
         .toList();
-    List<DateTime> _listOfAugust = _listOfDatesInYear
+    List<DateTime> listOfAugust = listOfDatesInYear
         .where((element) => element.month == DateTime.august)
         .toList();
-    List<DateTime> _listOfSept = _listOfDatesInYear
+    List<DateTime> listOfSept = listOfDatesInYear
         .where((element) => element.month == DateTime.september)
         .toList();
-    List<DateTime> _listOfOct = _listOfDatesInYear
+    List<DateTime> listOfOct = listOfDatesInYear
         .where((element) => element.month == DateTime.october)
         .toList();
-    List<DateTime> _listOfNov = _listOfDatesInYear
+    List<DateTime> listOfNov = listOfDatesInYear
         .where((element) => element.month == DateTime.november)
         .toList();
-    List<DateTime> _listOfDec = _listOfDatesInYear
+    List<DateTime> listOfDec = listOfDatesInYear
         .where((element) => element.month == DateTime.december)
         .toList();
-    List<Map<String, List<DateTime>>> _months = [
-      {'Jan': _listOfJan},
-      {'Feb': _listOfFeb},
-      {'March': _listOfMarch},
-      {'April': _listOfApril},
-      {'May': _listOfMay},
-      {'June': _listOfJune},
-      {'July': _listOfJuly},
-      {'August': _listOfAugust},
-      {'Sept': _listOfSept},
-      {'Oct': _listOfOct},
-      {'Nov': _listOfNov},
-      {'Dec': _listOfDec},
+    List<Map<String, List<DateTime>>> months = [
+      {'Jan': listOfJan},
+      {'Feb': listOfFeb},
+      {'March': listOfMarch},
+      {'April': listOfApril},
+      {'May': listOfMay},
+      {'June': listOfJune},
+      {'July': listOfJuly},
+      {'August': listOfAugust},
+      {'Sept': listOfSept},
+      {'Oct': listOfOct},
+      {'Nov': listOfNov},
+      {'Dec': listOfDec},
     ];
-    return _months;
+    return months;
   }
 
   ///This [getAll42DaysIn1Month] function will return all the 42 days in  a m

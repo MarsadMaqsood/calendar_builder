@@ -98,7 +98,7 @@ class CalendarGlobals {
   static bool showLogs = false;
 
   ///Enable or disable dev logs
-  static void debugLogs(Object _log) {
-    if (showLogs) debugPrint(_log.toString());
+  static void debugLogs(Object log) {
+    if (showLogs) debugPrint(log.toString());
   }
 }

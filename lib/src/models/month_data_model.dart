@@ -145,7 +145,6 @@ class YearDropDownCustomizer {
   ///
   ///
   /// ```
-  /// {@end-tool}
   final YearHeaderCustomizer? yearHeaderCustomizer;
 
   ///customise year button style [YearButtonCustomizer]
@@ -155,7 +154,6 @@ class YearDropDownCustomizer {
   ///
   ///
   /// ```
-  /// {@end-tool}
   final YearButtonCustomizer? yearButtonCustomizer;
 
   ///Build your custom YearDropDown Header
@@ -183,7 +181,6 @@ class YearDropDownCustomizer {
   ///         );
   ///       },
   /// ```
-  /// {@end-tool}
   ///
   final WidgetCbYearHeader? yearHeaderBuilder;
 
@@ -232,7 +229,6 @@ class YearDropDownCustomizer {
   ///                    );
   ///                  },
   /// ```
-  /// {@end-tool}
   ///
   final WidgetCbYearButton? yearButtonBuilder;
 
@@ -506,7 +502,6 @@ class MonthCustomizer {
   ///                    );
   ///                  },
   /// ```
-  /// {@end-tool}
   ///
   final WidgetCbMonthButton? monthButtonBuilder;
 
@@ -536,7 +531,6 @@ class MonthCustomizer {
   ///         },
 
   /// ```
-  /// {@end-tool}
   ///
   final WidgetCbMonthWeek? monthWeekBuilder;
 
@@ -567,7 +561,6 @@ class MonthCustomizer {
   ///             );
   ///           },
   /// ```
-  /// {@end-tool}
   ///
   final WeidgetCbMonthHeader? monthHeaderBuilder;
 }
@@ -605,7 +598,6 @@ class MonthHeaderCustomizer {
   ///    'December',
   ///]
   ///````
-  /// {@end-tool}
   ///
   final List<String>? monthList;
 
@@ -641,7 +633,6 @@ class MonthWeekCustomizer {
   ///  'SAT',
   ///]
   ///````
-  /// {@end-tool}
   ///
   final List<String>? weekList;
 
